@@ -9,24 +9,27 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>Filmoteka</title>
 <style>
-:root{--bg:#0e1014;--sur:#181b22;--sur2:#20242d;--bd:#2a2f3a;--tx:#e8eaee;--mu:#8b919d;--ac:#f2b40b;--acx:#1a1300;--ok:#2ecc71;--wip:#ff9f1a;--r:14px}
+:root{--bg:#0e1014;--sur:#181b22;--sur2:#20242d;--bd:#2a2f3a;--tx:#e8eaee;--mu:#8b919d;--ac:#f2b40b;--acx:#1a1300;--ok:#2ecc71;--wip:#ff9f1a;--bad:#e5484d;--r:14px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .hidden{display:none!important}
 button{font-family:inherit}
 header.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:8px;padding:calc(10px + env(safe-area-inset-top)) 14px 10px;background:rgba(14,16,20,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--bd)}
-header.top h1{margin:0;font-size:20px;flex:1;letter-spacing:.3px}
+header.top h1{margin:0;font-size:20px;flex:1;letter-spacing:.3px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 header.top h1 span{color:var(--ac)}
 .icon-btn{width:40px;height:40px;flex:none;border-radius:12px;border:1px solid var(--bd);background:var(--sur);color:var(--tx);font-size:18px;display:grid;place-items:center;cursor:pointer}
-.seg{display:flex;margin:12px 14px 0;padding:4px;background:var(--sur);border:1px solid var(--bd);border-radius:14px;max-width:692px}
-.seg button{flex:1;height:40px;border:0;border-radius:10px;background:transparent;color:var(--mu);font-size:16px;font-weight:700;cursor:pointer}
-.seg button.on{background:var(--ac);color:var(--acx)}
+.seg{display:flex;gap:8px;margin:12px 14px 0;max-width:692px}
+.seg button{flex:1;height:44px;border-radius:12px;border:1px solid var(--bd);background:var(--sur);color:var(--mu);font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.seg button i{font-style:normal;width:20px;height:20px;border-radius:6px;border:2px solid var(--bd);display:grid;place-items:center;font-size:14px;line-height:1;color:transparent}
+.seg button.on{background:var(--ac);color:var(--acx);border-color:var(--ac)}
+.seg button.on i{border-color:var(--acx);color:var(--acx)}
 @media(min-width:720px){.seg{margin-left:auto;margin-right:auto}}
-.fwrap{padding:14px 14px 210px;max-width:720px;margin:0 auto}
+.fwrap{padding:14px 14px 130px;max-width:720px;margin:0 auto}
 .sec{background:var(--sur);border:1px solid var(--bd);border-radius:var(--r);padding:14px;margin-bottom:14px}
 .sec>h2{margin:0 0 10px;font-size:13px;text-transform:uppercase;letter-spacing:1px;color:var(--mu);font-weight:600}
 .group{margin-bottom:12px}.group:last-child{margin-bottom:0}
 .group>label,.lbl{display:block;font-size:14px;color:var(--mu);margin-bottom:5px}
+.group>label small{opacity:.7}
 input[type=text],input[type=number],input[type=url],input[type=password],input[type=date],select{width:100%;height:46px;padding:0 12px;border-radius:12px;border:1px solid var(--bd);background:var(--sur2);color:var(--tx);font-size:16px;outline:none;appearance:none;-webkit-appearance:none;font-family:inherit}
 input[type=date]{color-scheme:dark}
 select{background-image:linear-gradient(45deg,transparent 50%,var(--mu) 50%),linear-gradient(135deg,var(--mu) 50%,transparent 50%);background-position:calc(100% - 20px) 20px,calc(100% - 15px) 20px;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
@@ -34,44 +37,44 @@ input:focus,select:focus{border-color:var(--ac)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .sw{position:relative;flex:1;min-width:0}
 .sug{position:absolute;left:0;right:0;top:50px;z-index:15;background:var(--sur2);border:1px solid var(--ac);border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.6)}
-.sug button{display:block;width:100%;text-align:left;padding:11px 12px;border:0;border-bottom:1px solid var(--bd);background:transparent;color:var(--tx);font-size:15px;cursor:pointer}
+.sug button{display:block;width:100%;text-align:left;padding:10px 12px;border:0;border-bottom:1px solid var(--bd);background:transparent;color:var(--tx);font-size:15px;cursor:pointer}
 .sug button:last-child{border-bottom:0}
 .sug button b{color:var(--ac);font-weight:600}
 .mrow{margin-bottom:6px}
 .mrow .line{display:flex;gap:8px}
 .op{display:block;margin:2px auto 6px;min-width:64px;height:28px;border-radius:14px;border:1px solid var(--ac);background:transparent;color:var(--ac);font-weight:700;font-size:13px;cursor:pointer}
+.op[data-v=not]{border-color:var(--bad);color:var(--bad)}
 .x{width:46px;flex:none;height:46px;border-radius:12px;border:1px solid var(--bd);background:var(--sur2);color:var(--mu);font-size:20px;cursor:pointer}
 .add{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 6px;border-radius:18px;border:1px dashed var(--bd);background:transparent;color:var(--tx);font-size:14px;cursor:pointer;margin-top:2px}
 .add b{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--ac);color:var(--acx);font-size:18px;line-height:1}
+.morebtn{width:100%;height:46px;border-radius:12px;border:1px solid var(--bd);background:var(--sur);color:var(--tx);font-size:15px;font-weight:600;cursor:pointer;margin-bottom:14px}
+.morebtn b{color:var(--ac)}
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:14px 14px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 22%)}
-.bar .in{display:flex;flex-direction:column;gap:10px;width:100%;max-width:720px;margin:0 auto}
-.bar .r1{display:flex;gap:10px}
-.bar .r2{display:flex;justify-content:space-between;gap:22px}
+.bar .in{display:flex;gap:10px;width:100%;max-width:720px;margin:0 auto}
 button.primary,button.ghost{height:52px;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer;border:0}
 button.primary{flex:1;background:var(--ac);color:var(--acx);box-shadow:0 6px 20px rgba(242,180,11,.25)}
 button.ghost{padding:0 18px;background:var(--sur);color:var(--tx);border:1px solid var(--bd);font-weight:600}
-button.soft{flex:1;height:44px;border-radius:12px;border:1px solid var(--bd);background:var(--sur);color:var(--tx);font-size:14px;font-weight:600;cursor:pointer}
+button.dice{width:56px;padding:0;font-size:24px}
 .sortbar{display:flex;gap:8px;padding:10px 14px;align-items:center;border-bottom:1px solid var(--bd);background:var(--bg)}
 .sortbar select{height:40px;flex:1}
 #rescount{font-size:15px;font-weight:600;color:var(--tx);white-space:nowrap;margin:0}
 #grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 10px;padding:14px 10px calc(40px + env(safe-area-inset-bottom))}
 @media(min-width:560px){#grid{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:900px){#grid{grid-template-columns:repeat(6,1fr);max-width:1100px;margin:0 auto}}
-.card{display:block;color:inherit;text-decoration:none;min-width:0;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
+.card{display:block;color:inherit;min-width:0;cursor:pointer;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
 .pw{position:relative;aspect-ratio:2/3;border-radius:10px;overflow:hidden;background:var(--sur2);box-shadow:0 4px 14px rgba(0,0,0,.4);transition:transform .12s}
 .pw img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
 .pw.noimg{display:grid;place-items:center;padding:8px;text-align:center;font-size:13px;color:var(--mu)}
 .bdg{position:absolute;right:6px;bottom:6px;width:24px;height:24px;border-radius:50%;display:none;place-items:center;color:#fff;font-size:15px;font-weight:800;line-height:1;box-shadow:0 2px 6px rgba(0,0,0,.55)}
 .bdg.yes{display:grid;background:var(--ok)}.bdg.prog{display:grid;background:var(--wip)}
+.kb{position:absolute;left:5px;top:5px;padding:2px 6px;border-radius:6px;background:rgba(14,16,20,.82);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:10px;font-weight:800;letter-spacing:.5px;line-height:1.3}
+.kb.mini{background:rgba(242,180,11,.92);color:var(--acx);border-color:transparent}
 .card .t{margin-top:6px;font-size:13px;line-height:1.25;text-align:center;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;word-break:break-word}
 .card:active .pw{transform:scale(.97)}
 .empty{text-align:center;color:var(--mu);padding:60px 20px}
-#toast,#snack{position:fixed;left:50%;transform:translateX(-50%);background:var(--sur2);border:1px solid var(--bd);padding:10px 16px;border-radius:22px;font-size:14px;z-index:90;opacity:0;pointer-events:none;transition:opacity .25s;max-width:92vw;text-align:center}
-#toast{bottom:calc(150px + env(safe-area-inset-bottom))}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(24px + env(safe-area-inset-bottom));background:var(--sur2);border:1px solid var(--bd);padding:10px 16px;border-radius:22px;font-size:14px;z-index:90;opacity:0;pointer-events:none;transition:opacity .25s;max-width:92vw;text-align:center}
+body[data-v=f] #toast{bottom:calc(96px + env(safe-area-inset-bottom))}
 #toast.on{opacity:1}
-#snack{bottom:calc(24px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:14px;white-space:nowrap}
-#snack.on{opacity:1;pointer-events:auto}
-#snack button{border:0;background:transparent;color:var(--ac);font-weight:700;font-size:14px;cursor:pointer;padding:6px 4px}
 #loading{position:fixed;inset:0;z-index:80;background:rgba(14,16,20,.88);display:grid;place-items:center;text-align:center;color:var(--mu)}
 .spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--bd);border-top-color:var(--ac);animation:sp 1s linear infinite;margin:0 auto 12px}
 @keyframes sp{to{transform:rotate(360deg)}}
@@ -89,36 +92,41 @@ dialog .row button.primary{background:var(--ac);color:var(--acx);border:0;font-w
 .hint{font-size:13px;color:var(--mu);margin:4px 0 0}
 details{margin-top:12px;font-size:13px;color:var(--mu)}
 pre{white-space:pre-wrap;font-size:12px;background:var(--sur2);padding:10px;border-radius:10px;max-height:220px;overflow:auto}
-textarea{width:100%;height:120px;border-radius:12px;border:1px solid var(--bd);background:var(--sur2);color:var(--tx);padding:10px;font-size:13px}
-/* podrobnosti */
-#dlg-det{padding:0;width:min(94vw,560px)}
-.dclose{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;padding:10px 10px 0;margin-bottom:-44px;pointer-events:none}
-.dclose button{pointer-events:auto;width:38px;height:38px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:18px;cursor:pointer}
-.dtop{display:flex;gap:14px;padding:16px 16px 6px;background:linear-gradient(var(--sur2),var(--sur))}
-.dpost{width:34%;max-width:150px;flex:none;aspect-ratio:2/3;border-radius:10px;background:var(--bd);overflow:hidden}
+/* podrobnosti (cela stran) */
+.dtop{display:flex;gap:14px;padding:16px 14px 8px;background:linear-gradient(var(--sur2),var(--bg));max-width:720px;margin:0 auto}
+.dpost{width:36%;max-width:190px;flex:none;aspect-ratio:2/3;border-radius:12px;background:var(--bd);overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.5)}
 .dpost img{width:100%;height:100%;object-fit:cover;display:block}
-.dinfo{min-width:0;padding-right:34px}
-.dinfo h2{font-size:20px;line-height:1.2;margin:0 0 4px;word-break:break-word}
-.dinfo .orig{color:var(--mu);font-size:14px;margin-bottom:6px}
-.dinfo .meta{color:var(--mu);font-size:14px}
-.rate{display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:6px 12px;border-radius:999px;background:var(--ac);color:var(--acx);font-weight:800;text-decoration:none;font-size:15px}
-.dbody{padding:6px 16px 18px}
-.dsec{margin-top:16px}
+.dinfo{min-width:0}
+.dinfo h2{font-size:22px;line-height:1.2;margin:0 0 4px;word-break:break-word}
+.dinfo .orig{color:var(--mu);font-size:14px;margin-bottom:6px;word-break:break-word}
+.dinfo .meta{color:var(--mu);font-size:14px;margin-top:2px}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.sc{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 11px;border-radius:999px;font-weight:800;font-size:14px;text-decoration:none;color:#fff;background:var(--sur2);border:1px solid var(--bd)}
+.sc small{font-weight:700;font-size:11px;opacity:.85;letter-spacing:.3px}
+.sc.imdb{background:var(--ac);color:var(--acx);border-color:transparent}
+.sc.rt{background:#c0392b;border-color:transparent}.sc.rt.rot{background:#4f8a3c}
+.sc.meta.g{background:#2e8b57;border-color:transparent}.sc.meta.y{background:#b8860b;border-color:transparent}.sc.meta.r{background:#a93226;border-color:transparent}
+.dbody{padding:6px 14px calc(30px + env(safe-area-inset-bottom));max-width:720px;margin:0 auto}
+.dsec{margin-top:18px}
 .dsec>h3{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mu);font-weight:700}
 .dsec p{margin:0;font-size:15px;line-height:1.5}
-.kv{display:grid;grid-template-columns:104px 1fr;gap:6px 12px;font-size:14px}
+.kv{display:grid;grid-template-columns:120px 1fr;gap:6px 12px;font-size:14px}
 .kv dt{color:var(--mu)}.kv dd{margin:0;word-break:break-word}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
-.chip{padding:4px 10px;border-radius:999px;background:var(--sur2);border:1px solid var(--bd);font-size:13px}
+.chip{padding:5px 11px;border-radius:999px;background:var(--sur2);border:1px solid var(--bd);font-size:13px;color:var(--tx)}
 .chip.g{border-color:var(--ac);color:var(--ac)}
-.mine{background:var(--sur2);border:1px solid var(--bd);border-radius:14px;padding:12px}
-.mine .st{display:inline-flex;align-items:center;gap:6px;font-weight:700;margin-bottom:10px}
-.mine .st i{width:12px;height:12px;border-radius:50%;background:var(--bd);display:inline-block}
-.mine .st.yes i{background:var(--ok)}.mine .st.prog i{background:var(--wip)}
-.stepper{display:flex;gap:8px;align-items:center}
-.stepper button{width:46px;height:46px;flex:none;border-radius:12px;border:1px solid var(--bd);background:var(--sur);color:var(--tx);font-size:22px;cursor:pointer}
-.stepper input{text-align:center}
-.stepper span{color:var(--mu);white-space:nowrap}
+button.chip.lnk{cursor:pointer;font-family:inherit;font-size:14px;padding:6px 12px}
+button.chip.lnk:active{background:var(--ac);color:var(--acx)}
+.xbtn{display:flex;align-items:center;justify-content:space-between;width:100%;height:46px;border-radius:12px;border:1px solid var(--bd);background:var(--sur);color:var(--tx);font-size:15px;font-weight:600;padding:0 14px;margin-top:18px;cursor:pointer}
+.xbtn span{color:var(--mu);transition:transform .15s}
+.xbtn.open span{transform:rotate(180deg)}
+.xbody{padding:12px 2px 0}
+.faces{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:12px 8px;margin-top:10px}
+.face{background:none;border:0;color:var(--tx);cursor:pointer;text-align:center;font-size:12px;line-height:1.2;padding:0}
+.face .im{width:68px;height:68px;border-radius:50%;margin:0 auto 5px;background:var(--sur2);border:1px solid var(--bd);overflow:hidden;display:grid;place-items:center;color:var(--mu);font-size:22px;font-weight:700}
+.face .im img{width:100%;height:100%;object-fit:cover;display:block}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.links a{flex:1;min-width:140px;display:block;text-align:center;padding:12px;border-radius:12px;border:1px solid var(--bd);background:var(--sur);color:var(--tx);text-decoration:none;font-size:15px;font-weight:600}
 /* naključni predlog */
 .rnd{display:flex;gap:14px;margin-bottom:6px}
 .rnd .dpost{width:38%}
@@ -127,7 +135,7 @@ textarea{width:100%;height:120px;border-radius:12px;border:1px solid var(--bd);b
 .rnd .syn{font-size:13px;color:var(--mu);display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden;margin-top:8px}
 </style>
 </head>
-<body>
+<body data-v="f">
 
 <section id="s-filters">
   <header class="top">
@@ -136,22 +144,14 @@ textarea{width:100%;height:120px;border-radius:12px;border:1px solid var(--bd);b
     <button class="icon-btn" id="b-settings" title="Nastavitve" aria-label="Nastavitve">⚙</button>
   </header>
   <div class="seg" id="seg">
-    <button data-k="film" class="on">Filmi</button>
-    <button data-k="series">Serije</button>
+    <button data-k="film" class="on"><i>✓</i>Filmi</button>
+    <button data-k="series"><i>✓</i>Serije</button>
   </div>
-  <main class="fwrap">
-    <div id="f-film"></div>
-    <div id="f-series" class="hidden"></div>
-  </main>
+  <main class="fwrap" id="form"></main>
   <div class="bar"><div class="in">
-    <div class="r1">
-      <button class="ghost" id="b-clear">Počisti</button>
-      <button class="primary" id="b-show">Prikaži</button>
-    </div>
-    <div class="r2">
-      <button class="soft" id="b-rand">🎲 Naključni predlog</button>
-      <button class="soft" id="b-help">✨ Pomagaj mi izbrati</button>
-    </div>
+    <button class="ghost" id="b-clear">Počisti</button>
+    <button class="ghost dice" id="b-rand" title="Naključni predlog" aria-label="Naključni predlog">🎲</button>
+    <button class="primary" id="b-show">Prikaži</button>
   </div></div>
 </section>
 
@@ -166,6 +166,14 @@ textarea{width:100%;height:120px;border-radius:12px;border:1px solid var(--bd);b
   </div>
   <div id="grid"></div>
   <div id="sentinel" style="height:1px"></div>
+</section>
+
+<section id="s-det" class="hidden">
+  <header class="top">
+    <button class="icon-btn" id="b-back2" aria-label="Nazaj">←</button>
+    <h1 id="det-h"></h1>
+  </header>
+  <div id="det"></div>
 </section>
 
 <!-- nastavitve -->
@@ -187,9 +195,8 @@ textarea{width:100%;height:120px;border-radius:12px;border:1px solid var(--bd);b
 <!-- meni ob dolgem pritisku -->
 <dialog id="dlg-menu" class="sheet">
   <p class="mtitle" id="m-title"></p><p class="msub" id="m-sub"></p>
-  <button class="mbtn" id="m-watch"><i>✔</i><span id="m-watch-t">Nastavi kot ogledano</span></button>
   <button class="mbtn" id="m-list"><i>＋</i><span>Dodaj na seznam za ogled</span></button>
-  <button class="mbtn" id="m-det"><i>ⓘ</i><span>Več podrobnosti</span></button>
+  <button class="mbtn" id="m-watch"><i>✔</i><span id="m-watch-t">Nastavi kot ogledano</span></button>
   <div class="row"><button id="m-close">Zapri</button></div>
 </dialog>
 <dialog id="dlg-list" class="sheet">
@@ -198,31 +205,14 @@ textarea{width:100%;height:120px;border-radius:12px;border:1px solid var(--bd);b
   <div class="row"><button id="l-close">Prekliči</button></div>
 </dialog>
 
-<dialog id="dlg-det"><div class="dclose"><button id="det-x" aria-label="Zapri">✕</button></div><div id="det"></div></dialog>
-
 <dialog id="dlg-rnd">
-  <h2>Naključni predlog</h2>
+  <h2 id="rnd-h">Naključni predlog</h2>
   <div id="rnd"></div>
   <div class="row"><button id="r-close">Zapri</button><button id="r-det">Podrobnosti</button><button class="primary" id="r-next">Drug predlog</button></div>
 </dialog>
 
-<dialog id="dlg-help">
-  <h2>Pomagaj mi izbrati</h2>
-  <p class="hint" id="h-info" style="margin:0 0 12px"></p>
-  <div class="two">
-    <div class="group"><label class="lbl" for="h-n">Število naslovov</label>
-      <select id="h-n"><option value="150">150</option><option value="300" selected>300</option><option value="500">500</option></select></div>
-    <div class="group"><label class="lbl" for="h-m">Izbor</label>
-      <select id="h-m"><option value="top">Najbolje ocenjeni</option><option value="rnd">Naključni</option></select></div>
-  </div>
-  <textarea id="h-ta" class="hidden" readonly></textarea>
-  <p class="hint">Gumb kopira seznam in pripravljeno vprašanje ter odpre Claude. V novem pogovoru ga samo prilepi.</p>
-  <div class="row"><button id="h-close">Zapri</button><button class="primary" id="h-go">Kopiraj in odpri Claude</button></div>
-</dialog>
-
 <div id="loading" class="hidden"><div><div class="spin"></div>Nalagam seznam…</div></div>
 <div id="toast"></div>
-<div id="snack"><span></span><button type="button">Razveljavi</button></div>
 
 <script>
 'use strict';
@@ -239,24 +229,24 @@ const el = (tag, props = {}, ...kids) => {
   for (const c of kids.flat()) if (c != null && c !== false) e.append(c);
   return e;
 };
-const norm = s => String(s == null ? '' : s).toLowerCase().normalize('NFD')
-  .replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/[^a-z0-9]+/g, ' ').trim();
+/* Iskanje: brez naglasov; črke č ć š ž đ ostanejo posebej (za natančno iskanje, če jih vpišeš). */
+const SLC = { 'č': '', 'ć': '', 'š': '', 'ž': '', 'đ': '' };
+const SLB = { '': 'c', '': 'c', '': 's', '': 'z', '': 'd' };
+const nd = s => String(s == null ? '' : s).toLowerCase().replace(/[čćšžđ]/g, c => SLC[c])
+  .replace(/ø/g, 'o').replace(/æ/g, 'ae').replace(/œ/g, 'oe').replace(/ß/g, 'ss').replace(/ł/g, 'l')
+  .normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9-]+/g, ' ').trim();
+const norm = s => nd(s).replace(/[-]/g, c => SLB[c]);
 const coll = new Intl.Collator('sl', { sensitivity: 'base', numeric: true });
 const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
 const num = v => { const m = String(v == null ? '' : v).replace(',', '.').match(/-?\d+(\.\d+)?/); return m ? parseFloat(m[0]) : NaN; };
 const isoToday = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
 const fmtDate = s => { const m = String(s || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? (+m[3]) + '. ' + (+m[2]) + '. ' + m[1] : (s || ''); };
-let toastT, snackT;
+let toastT;
 function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2800); }
-function snack(msg, undo) {
-  const s = $('#snack'), b = s.querySelector('button');
-  s.querySelector('span').textContent = msg;
-  b.classList.toggle('hidden', !undo);
-  b.onclick = () => { s.classList.remove('on'); if (undo) undo(); };
-  s.classList.add('on'); clearTimeout(snackT); snackT = setTimeout(() => s.classList.remove('on'), 9000);
-}
 document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
 const loading = on => $('#loading').classList.toggle('hidden', !on);
+const lsGet = k => { try { return localStorage.getItem(k); } catch { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
 
 /* ================= nastavitve ================= */
 const CFG_KEY = 'filmoteka.cfg2';
@@ -266,8 +256,6 @@ const setCfg = c => { try { localStorage.setItem(CFG_KEY, JSON.stringify(c)); } 
   const p = new URLSearchParams(location.search);
   if (p.has('u')) { setCfg({ u: p.get('u') || '', k: p.get('k') || '' }); history.replaceState(null, '', location.pathname); }
 })();
-const lsGet = k => { try { return localStorage.getItem(k); } catch { return null; } };
-const lsSet = (k, v) => { try { localStorage.setItem(k, v); } catch {} };
 
 /* ================= predpomnilnik (IndexedDB) ================= */
 const idb = () => new Promise((res, rej) => { const r = indexedDB.open('filmoteka', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); });
@@ -285,38 +273,42 @@ async function api(action, extra) {
     const t = await r.text(); let j;
     try { j = JSON.parse(t); } catch { throw new Error('Skripta ni vrnila podatkov (pri objavi mora biti dostop »Kdor koli«)'); }
     if (!j.ok) throw new Error(j.error || 'Napaka skripte');
+    if (j.cfg && j.cfg.tmdb) lsSet('filmoteka.tmdb', j.cfg.tmdb);
     return j;
   } catch (e) { throw e.name === 'AbortError' ? new Error('Časovna omejitev') : e; }
   finally { clearTimeout(to); }
 }
 
 /* ================= stolpci ================= */
-// točna imena stolpcev (brez šumnikov in malimi črkami) -> interno polje
+// ime stolpca (norm) -> interno polje
 const COL = {
-  'ime': 'title', 'leto': 'year', 'zanr': 'genre', 'kljucne besede': 'keywords', 'imdb ocena': 'rating',
+  'imdb id': 'id', 'ime': 'title', 'leto': 'year', 'zanr': 'genre', 'kljucne besede': 'keywords', 'imdb ocena': 'rating',
   'cas trajanja': 'runtime', 'cas trajanja epizode': 'runtime', 'stevilo epizod': 'eps', 'stevilo sezon': 'seasons',
+  'status': 'sstatus', 'miniserija': 'mini',
   'posebne epizode': 'specials', 'sinopsis': 'synopsis', 'podnapisi': 'subtitles', 'ogledano': 'watched',
   'za ogled': 'towatch', 'datum zadnjega ogleda': 'lastwatched', 'jezik originala': 'language', 'v knjiznici': 'library',
   'vir': 'source', 'ogledanih epizod': 'seen', 'nadaljevanje film': 'sequel', 'rezija': 'director', 'igralci': 'actors',
   'scenarij': 'writer', 'originalni naslov': 'original', 'v zbirki': 'collection',
   'povezava do posterja': 'poster', 'povezava do imdb': 'imdb',
+  'starostna omejitev': 'age', 'rotten tomatoes': 'rt', 'metascore': 'meta', 'oskar najboljsi film': 'oscar', 'stevilo nagrad': 'awards',
 };
 const LABEL = { title: 'Naslov', original: 'Originalni naslov', year: 'Leto', genre: 'Žanr', keywords: 'Ključne besede', rating: 'IMDB ocena',
   runtime: 'Trajanje', synopsis: 'Sinopsis', director: 'Režija', writer: 'Scenarij', actors: 'Igralci', subtitles: 'Podnapisi',
   watched: 'Ogledano', towatch: 'Za ogled', language: 'Jezik originala', library: 'V knjižnici', source: 'Vir',
   collection: 'V zbirki', seen: 'Ogledanih epizod', eps: 'Število epizod', seasons: 'Število sezon', lastwatched: 'Datum zadnjega ogleda',
-  specials: 'Posebne epizode', sequel: 'Nadaljevanje (film)' };
+  specials: 'Posebne epizode', sequel: 'Nadaljevanje', age: 'Starostna omejitev', sstatus: 'Status serije', mini: 'Miniserija',
+  oscar: 'Oskar', awards: 'Število nagrad', rt: 'Rotten Tomatoes', meta: 'Metascore' };
 const TEXTF = ['title', 'original', 'synopsis', 'director', 'writer', 'actors', 'keywords', 'genre', 'collection'];
-const SELF = ['watched', 'towatch', 'subtitles', 'library', 'language', 'source'];
+const SELF = ['watched', 'towatch', 'subtitles', 'library', 'language', 'source', 'age', 'sstatus', 'mini'];
 const MULTI = ['genre', 'actors', 'director', 'writer', 'keywords'];
 const KINDS = ['film', 'series'];
-const KIND_LABEL = { film: 'filmov', series: 'serij' };
 
 /* ================= podatki ================= */
 const D = { film: null, series: null };   // obdelani podatki po vrsti
 let RAW = null;                           // surov odgovor skripte (shranjen v IndexedDB)
-let KIND = lsGet('filmoteka.kind') === 'series' ? 'series' : 'film';
+const KON = (() => { try { const k = JSON.parse(lsGet('filmoteka.kon')); if (k && (k.film || k.series)) return { film: !!k.film, series: !!k.series }; } catch {} return { film: true, series: false }; })();
 const SUG = {};
+const U = { has: new Set(), opts: {}, sig: '' };    // združeno za obe vrsti
 
 function parseRuntime(v) {
   v = String(v || '').trim(); if (!v) return NaN;
@@ -326,7 +318,14 @@ function parseRuntime(v) {
 }
 const parseDate = v => { const m = String(v || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? Date.UTC(+m[1], +m[2] - 1, +m[3]) : NaN; };
 const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
-const thumb = (u, w) => /m\.media-amazon\.com\/images\/M\//.test(u) ? u.replace(/(\._V1_[^/]*)?(\.\w+)$/, '._V1_SX' + (w || 320) + '$2') : u;
+function thumb(u, w) {
+  if (!u) return u;
+  const m = u.match(/^(https:\/\/image\.tmdb\.org\/t\/p\/)(?:original|w\d+)(\/.+)$/);
+  if (m) return m[1] + (w <= 185 ? 'w185' : w <= 342 ? 'w342' : w <= 500 ? 'w500' : 'w780') + m[2];
+  if (/m\.media-amazon\.com\/images\/M\//.test(u)) return u.replace(/(\._V1_[^/]*)?(\.\w+)$/, '._V1_SX' + (w || 320) + '$2');
+  return u;
+}
+const isMini = o => o.kind === 'series' && norm(o.v.mini) === 'da';
 
 function derive(o) {
   const v = o.v;
@@ -335,8 +334,13 @@ function derive(o) {
   o.year = ym ? +ym[0] : NaN;
   o.yearText = String(v.year || '').replace(/\.0$/, '');
   o.rating = num(v.rating); o.runtime = parseRuntime(v.runtime); o.last = parseDate(v.lastwatched);
-  o.imdb = safeUrl(v.imdb); o.poster = safeUrl(v.poster);
-  const idm = (v.imdb || '').match(/tt\d{6,}/); o.id = idm ? idm[0] : '';
+  o.rt = num(v.rt); o.meta = num(v.meta);
+  const link = safeUrl(v.imdb);
+  o.imdb = /imdb\.com/i.test(link) ? link : '';
+  o.tmdb = /themoviedb\.org/i.test(link) ? link : '';
+  if (!o.imdb) { const idm = String(v.id || '').match(/tt\d{6,}/); if (idm) o.imdb = 'https://www.imdb.com/title/' + idm[0] + '/'; }
+  o.poster = safeUrl(v.poster);
+  const idm2 = (o.imdb || '').match(/tt\d{6,}/); o.id = idm2 ? idm2[0] : '';
   for (const f of SELF) o.t[f] = new Set((v[f] || '').split(/[,;|]/).map(norm).filter(Boolean));
   const w = norm(v.watched);
   if (w === 'da') o.status = 'yes';
@@ -349,8 +353,8 @@ function derive(o) {
 function mkRow(raw, ix, kind) {
   const v = {};
   for (const f in ix) { const x = raw[ix[f]]; v[f] = x == null ? '' : String(x).trim(); }
-  const o = { r: raw[0], raw, ix, kind, v, n: {}, t: {} };
-  for (const f of TEXTF) o.n[f] = norm(v[f]);
+  const o = { r: raw[0], raw, ix, kind, v, n: {}, d: {}, t: {} };
+  for (const f of TEXTF) { o.n[f] = norm(v[f]); o.d[f] = nd(v[f]); }
   derive(o);
   return o;
 }
@@ -373,15 +377,24 @@ function buildKind(kind, s) {
     const all = [...m.entries(), ...add];
     if (all.length && all.length <= 300) opts[f] = all;
   }
-  const genres = [...new Set(rows.flatMap(o => (o.v.genre || '').split(',').map(x => x.trim()).filter(Boolean)))].sort(coll.compare);
-  return { kind, rows, has, ix, hn, opts, genres, headers: s.headers };
+  return { kind, rows, has, ix, hn, opts, headers: s.headers };
+}
+function unite() {
+  U.has = new Set(); U.opts = {};
+  for (const k of KINDS) if (D[k]) {
+    D[k].has.forEach(f => U.has.add(f));
+    for (const f in D[k].opts) { const m = U.opts[f] || (U.opts[f] = new Map()); for (const [key, t] of D[k].opts[f]) if (!m.has(key)) m.set(key, t); }
+  }
+  for (const f in U.opts) U.opts[f] = [...U.opts[f].entries()];
+  U.sig = JSON.stringify([[...U.has].sort(), U.opts]);
 }
 function ingest(p) {
   RAW = p;
   for (const k of Object.keys(SUG)) delete SUG[k];
   for (const k of KINDS) D[k] = p.sheets && p.sheets[k] ? buildKind(k, p.sheets[k]) : null;
-  for (const k of KINDS) buildFilters(k);
-  applyKind();
+  unite();
+  buildForm(false);
+  applyKinds();
   const diag = [];
   for (const k of KINDS) if (D[k]) {
     diag.push('— ' + (k === 'film' ? 'Filmi' : 'Serije') + ' (' + D[k].rows.length + ' vrstic) —');
@@ -390,41 +403,38 @@ function ingest(p) {
     if (un.length) diag.push('Neuporabljeni stolpci: ' + un.join(', '));
   }
   $('#diag').textContent = diag.join('\n') || '–';
-  if (!$('#s-results').classList.contains('hidden') && RES.f && D[RES.kind]) { RES.list = D[RES.kind].rows.filter(r => match(r, RES.f)); applySort(); renderResults(RES.shown); }
+  if (V === 'res' && RES.f) { RES.list = pool().filter(r => match(r, RES.f)); applySort(); renderResults(RES.shown); }
 }
+const pool = () => KINDS.filter(k => KON[k] && D[k]).flatMap(k => D[k].rows);
 
 /* ================= predlogi pri tipkanju ================= */
-function sugIndex(kind, field) {
-  const key = kind + '|' + field; if (SUG[key]) return SUG[key];
-  const m = new Map(), d = D[kind]; if (!d) return [];
+function sugIndex(field) {
+  const key = KINDS.filter(k => KON[k]).join('+') + '|' + field; if (SUG[key]) return SUG[key];
+  const m = new Map();
   const add = t => { t = t.trim(); if (!t) return; const n = norm(t); const e = m.get(n); if (e) e.c++; else m.set(n, { t, n, c: 1 }); };
-  for (const o of d.rows) {
-    if (field === 'title') { add(o.v.title); if (o.v.original) add(o.v.original); }
+  for (const o of pool()) {
+    if (field === 'title') { add(o.v.title); if (o.v.original) for (const x of o.v.original.split(' + ')) add(x); }
     else for (const tok of (o.v[field] || '').split(',')) add(tok);
   }
   return SUG[key] = [...m.values()];
 }
-function suggest(kind, field, q) {
-  const nq = norm(q); if (!nq) return [];
-  const idx = sugIndex(kind, field), a = [], b = [];
-  for (const e of idx) { if (e.n.startsWith(nq)) a.push(e); else if (e.n.includes(nq)) b.push(e); }
+function suggest(field, q) {
+  const nq = norm(q.replace(/\*/g, ' ')); if (!nq) return [];
+  const a = [], b = [];
+  for (const e of sugIndex(field)) { if (e.n.startsWith(nq)) a.push(e); else if (e.n.includes(nq)) b.push(e); }
   const cmp = field === 'title' ? (x, y) => coll.compare(x.t, y.t) : (x, y) => (y.c - x.c) || coll.compare(x.t, y.t);
   a.sort(cmp); b.sort(cmp);
-  return a.concat(b).slice(0, 8);
+  return a.concat(b).slice(0, 6);
 }
-function attachSuggest(input, kind, field) {
+function attachSuggest(input, field) {
   const box = el('div', { class: 'sug hidden' });
   const hide = () => box.classList.add('hidden');
   const show = () => {
-    const items = suggest(kind, field, input.value);
+    const items = suggest(field, input.value);
     box.textContent = '';
     if (!items.length) return hide();
-    const nq = norm(input.value);
     for (const e of items) {
-      const b = el('button', { type: 'button' });
-      const i = norm(e.t).indexOf(nq);
-      if (i >= 0 && nq && e.t.length === norm(e.t).length) b.append(e.t.slice(0, i), el('b', { text: e.t.slice(i, i + nq.length) }), e.t.slice(i + nq.length));
-      else b.textContent = e.t;
+      const b = el('button', { type: 'button', text: e.t });
       b.addEventListener('pointerdown', ev => { ev.preventDefault(); input.value = e.t; hide(); input.dispatchEvent(new Event('input', { bubbles: true })); });
       box.append(b);
     }
@@ -437,95 +447,152 @@ function attachSuggest(input, kind, field) {
 }
 
 /* ================= obrazec s filtri ================= */
-const root = k => $('#f-' + k);
+const root = () => $('#form');
+const scheduleCount = debounce(() => { countNow(); updMore(); }, 150);
 function countNow() {
-  const d = D[KIND]; if (!d) { $('#b-show').textContent = 'Prikaži'; return 0; }
-  const f = readFilters(KIND); let n = 0;
-  for (const r of d.rows) if (match(r, f)) n++;
+  const p = pool(); if (!p.length) { $('#b-show').textContent = 'Prikaži'; return 0; }
+  const f = readFilters(); let n = 0;
+  for (const r of p) if (match(r, f)) n++;
   $('#b-show').textContent = 'Prikaži (' + n.toLocaleString('sl') + ')'; return n;
 }
-const scheduleCount = debounce(countNow, 150);
-
-function textGroup(kind, f, label, ph, suggestField) {
+function textGroup(f, label, ph, suggestField) {
   const i = el('input', { type: 'text', 'data-f': f, placeholder: ph || '', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false' });
   i.addEventListener('input', scheduleCount);
   const w = el('div', { class: 'sw' }, i);
-  if (suggestField) w.append(attachSuggest(i, kind, suggestField));
+  if (suggestField) w.append(attachSuggest(i, suggestField));
   return el('div', { class: 'group' }, el('label', { text: label }), w);
 }
-function selGroup(kind, f) {
-  const s = el('select', { 'data-f': f });
-  s.append(el('option', { value: '', text: 'Vse' }));
-  if (f === 'watched') s.append(el('option', { value: '__unwatched', text: 'Neogledano' }));
-  s.append(el('option', { value: '__empty', text: '(prazno)' }));
-  for (const [k, t] of D[kind].opts[f]) s.append(el('option', { value: k, text: t }));
-  s.addEventListener('change', scheduleCount);
-  return el('div', { class: 'group' }, el('label', { text: LABEL[f] }), s);
-}
-function multiGroup(kind, f) {
+const OPS = { in: 'IN', or: 'ALI', not: 'BREZ' };
+function multiGroup(f, label) {
   const wrap = el('div', { class: 'group', 'data-multi': f });
   const rows = el('div', {});
   const add = () => {
     const first = !rows.children.length;
     const row = el('div', { class: 'mrow', 'data-op': 'in' });
     if (!first) row.append(el('button', {
-      type: 'button', class: 'op', text: 'IN', title: 'Dotakni se za zamenjavo IN / ALI',
-      onclick: e => { const o = row.dataset.op === 'in' ? 'or' : 'in'; row.dataset.op = o; e.currentTarget.textContent = o === 'in' ? 'IN' : 'ALI'; scheduleCount(); }
+      type: 'button', class: 'op', text: 'IN', 'data-v': 'in', title: 'Dotakni se: IN → ALI → BREZ',
+      onclick: e => { const order = ['in', 'or', 'not'], o = order[(order.indexOf(row.dataset.op) + 1) % 3]; row.dataset.op = o; e.currentTarget.dataset.v = o; e.currentTarget.textContent = OPS[o]; scheduleCount(); }
     }));
     const inp = el('input', { type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', placeholder: 'Vpiši besedilo…' });
     inp.addEventListener('input', scheduleCount);
-    const sw = el('div', { class: 'sw' }, inp, attachSuggest(inp, kind, f));
+    const sw = el('div', { class: 'sw' }, inp, attachSuggest(inp, f));
     const line = el('div', { class: 'line' }, sw);
     if (!first) line.append(el('button', { type: 'button', class: 'x', text: '×', 'aria-label': 'Odstrani', onclick: () => { row.remove(); scheduleCount(); } }));
     row.append(line); rows.append(row);
     if (!first) inp.focus();
+    return inp;
   };
-  wrap.append(el('label', { text: LABEL[f] }), rows,
+  wrap._add = add;
+  wrap.append(el('label', { text: label }), rows,
     el('button', { type: 'button', class: 'add', onclick: add }, el('b', { text: '+' }), 'Dodaj polje'));
   add();
   return wrap;
 }
+function selGroup(f, label) {
+  const s = el('select', { 'data-f': f });
+  s.append(el('option', { value: '', text: 'Vse' }));
+  if (f === 'watched') s.append(el('option', { value: '__unwatched', text: 'Neogledano' }));
+  s.append(el('option', { value: '__empty', text: '(prazno)' }));
+  for (const [k, t] of (U.opts[f] || [])) s.append(el('option', { value: k, text: t }));
+  s.addEventListener('change', scheduleCount);
+  return el('div', { class: 'group' }, el('label', { text: label || LABEL[f] }), s);
+}
 function rangeGroup(label, a, b, phA, phB, step) {
   const mk = (f, ph) => { const i = el('input', { type: 'number', 'data-f': f, placeholder: ph, inputmode: 'decimal', step: step || '1' }); i.addEventListener('input', scheduleCount); return i; };
-  return el('div', { class: 'group' }, el('label', { text: label }), el('div', { class: 'two' }, mk(a, phA), mk(b, phB)));
+  return el('div', { class: 'group' }, el('label', {}, label), el('div', { class: 'two' }, mk(a, phA), mk(b, phB)));
 }
-function buildFilters(kind) {
-  const box = root(kind); box.textContent = '';
-  const d = D[kind];
-  if (!d) { box.append(el('div', { class: 'empty', text: 'Za to vrsto ni podatkov (list v preglednici ni najden).' })); return; }
-  const has = d.has;
-  const s1 = el('div', { class: 'sec' }, el('h2', { text: 'Iskanje' }), textGroup(kind, 'q', 'Naslov (tudi originalni naslov)', 'npr. Matrix', 'title'));
-  if (has.has('synopsis')) s1.append(textGroup(kind, 'syn', 'Beseda v sinopsisu', ''));
-  if (has.has('collection')) s1.append(textGroup(kind, 'coll', 'V zbirki', 'npr. Collection'));
-  box.append(s1);
-  const mf = MULTI.filter(f => has.has(f));
-  if (mf.length) { const s = el('div', { class: 'sec' }, el('h2', { text: 'Podrobno iskanje' })); mf.forEach(f => s.append(multiGroup(kind, f))); box.append(s); }
-  const sf = SELF.filter(f => d.opts[f]);
-  if (sf.length) { const s = el('div', { class: 'sec' }, el('h2', { text: 'Stanje' })); sf.forEach(f => s.append(selGroup(kind, f))); box.append(s); }
-  const rg = [];
-  if (has.has('year')) rg.push(rangeGroup('Leto (od – do)', 'y1', 'y2', 'od npr. 1990', 'do npr. 2005'));
-  if (has.has('rating')) rg.push(rangeGroup('IMDB ocena (od – do)', 'r1', 'r2', 'od npr. 7', 'do npr. 10', '0.1'));
-  if (has.has('runtime')) rg.push(rangeGroup(kind === 'series' ? 'Trajanje epizode v minutah' : 'Trajanje v minutah', 't1', 't2', 'od', 'do'));
-  if (kind === 'series' && has.has('eps')) rg.push(rangeGroup('Število epizod', 'e1', 'e2', 'od', 'do'));
-  if (rg.length) box.append(el('div', { class: 'sec' }, el('h2', { text: 'Območja' }), rg));
+const only = (txt, who) => { const l = el('span'); l.append(txt + ' '); l.append(el('small', { text: '(samo ' + who + ')' })); return l; };
+let MOREOPEN = false;
+function buildForm(force) {
+  if (!force && root().dataset.sig === U.sig && root().children.length) return;
+  const box = root(); box.textContent = ''; box.dataset.sig = U.sig;
+  if (!pool().length && !(D.film || D.series)) { box.append(el('div', { class: 'empty', text: 'Seznam še ni naložen.' })); return; }
+  const has = U.has;
+  const basic = el('div', { class: 'sec' }, el('h2', { text: 'Iskanje' }));
+  basic.append(textGroup('q', 'Naslov (tudi drugi naslovi; * = poljubno besedilo)', 'npr. matrix, mat*x', 'title'));
+  if (has.has('genre')) basic.append(multiGroup('genre', 'Žanr'));
+  if (U.opts.watched) basic.append(selGroup('watched'));
+  if (U.opts.towatch) basic.append(selGroup('towatch'));
+  if (has.has('year')) basic.append(rangeGroup('Leto (od – do)', 'y1', 'y2', 'od npr. 1990', 'do npr. 2005'));
+  if (has.has('rating')) basic.append(rangeGroup('IMDB ocena (od – do)', 'r1', 'r2', 'od npr. 7', 'do npr. 10', '0.1'));
+  box.append(basic);
+  const mb = el('button', { type: 'button', class: 'morebtn', id: 'morebtn' });
+  mb.onclick = () => { MOREOPEN = !MOREOPEN; more_.classList.toggle('hidden', !MOREOPEN); updMore(); };
+  box.append(mb);
+  const more_ = el('div', { id: 'more', class: MOREOPEN ? '' : 'hidden' });
+  const s1 = el('div', { class: 'sec' }, el('h2', { text: 'Ljudje in vsebina' }));
+  if (has.has('actors')) s1.append(multiGroup('actors', 'Igralci'));
+  if (has.has('director')) s1.append(multiGroup('director', 'Režija'));
+  if (has.has('writer')) s1.append(multiGroup('writer', 'Scenarij'));
+  if (has.has('keywords')) s1.append(multiGroup('keywords', 'Ključne besede'));
+  if (has.has('synopsis')) s1.append(textGroup('syn', 'Beseda v sinopsisu', ''));
+  if (has.has('collection')) s1.append(textGroup('coll', 'V zbirki', 'npr. Collection'));
+  if (s1.children.length > 1) more_.append(s1);
+  const s2 = el('div', { class: 'sec' }, el('h2', { text: 'Ocene in nagrade' }));
+  if (has.has('rt')) s2.append(rangeGroup('Rotten Tomatoes % (od – do)', 'rt1', 'rt2', 'od npr. 80', 'do 100'));
+  if (has.has('meta')) s2.append(rangeGroup('Metascore (od – do)', 'm1', 'm2', 'od npr. 60', 'do 100'));
+  if (U.opts.age) s2.append(selGroup('age'));
+  if (has.has('oscar')) {
+    const s = el('select', { 'data-f': 'oscar' }, el('option', { value: '', text: 'Vse' }), el('option', { value: 'da', text: 'Samo zmagovalci' }));
+    s.addEventListener('change', scheduleCount);
+    s2.append(el('div', { class: 'group' }, el('label', {}, only('Oskar za najboljši film', 'filmi')), s));
+  }
+  if (s2.children.length > 1) more_.append(s2);
+  const s3 = el('div', { class: 'sec' }, el('h2', { text: 'Podatki' }));
+  if (has.has('runtime')) s3.append(rangeGroup('Trajanje v minutah (film ali epizoda)', 't1', 't2', 'od', 'do'));
+  if (U.opts.language) s3.append(selGroup('language'));
+  if (U.opts.subtitles) s3.append(selGroup('subtitles'));
+  if (U.opts.library) s3.append(selGroup('library'));
+  if (U.opts.source) s3.append(selGroup('source'));
+  if (s3.children.length > 1) more_.append(s3);
+  const s4 = el('div', { class: 'sec' }, el('h2', { text: 'Serije' }));
+  if (U.opts.sstatus) s4.append(selGroup('sstatus', 'Status'));
+  if (U.opts.mini) s4.append(selGroup('mini', 'Miniserija'));
+  if (has.has('eps')) s4.append(rangeGroup(only('Število epizod', 'serije'), 'e1', 'e2', 'od', 'do'));
+  if (s4.children.length > 1) more_.append(s4);
+  box.append(more_);
+  updMore(); countNow();
 }
-function readFilters(kind) {
-  const r = root(kind);
+const MOREFIELDS = ['syn', 'coll', 'rt1', 'rt2', 'm1', 'm2', 'oscar', 'age', 'sstatus', 'mini', 'e1', 'e2', 't1', 't2', 'language', 'subtitles', 'library', 'source'];
+function updMore() {
+  const b = $('#morebtn'); if (!b) return;
+  const r = root(); let n = 0;
+  for (const f of MOREFIELDS) { const e = r.querySelector('[data-f="' + f + '"]'); if (e && String(e.value).trim()) n++; }
+  r.querySelectorAll('#more [data-multi]').forEach(w => { if ([...w.querySelectorAll('input')].some(i => i.value.trim())) n++; });
+  b.textContent = '';
+  b.append((MOREOPEN ? 'Manj možnosti ▴' : 'Več možnosti ▾'), n ? el('b', { text: '  · aktivnih: ' + n }) : '');
+}
+function mkTerm(q) {
+  const raw = String(q || '').toLowerCase().trim(); if (!raw) return null;
+  const useD = /[čćšžđ]/.test(raw), fn = useD ? nd : norm;
+  const parts = raw.split('*').map(fn);
+  if (!parts.some(Boolean)) return null;
+  if (parts.length === 1) return { useD, sub: parts[0], rx: null };
+  return { useD, sub: null, rx: new RegExp(parts.map(p => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('.*')) };
+}
+const hit = (t, r, f) => { const h = (t.useD ? r.d : r.n)[f] || ''; return t.rx ? t.rx.test(h) : h.includes(t.sub); };
+function readFilters() {
+  const r = root();
   const g = f => { const e = r.querySelector('[data-f="' + f + '"]'); return e ? e.value : ''; };
   const n = f => { const v = g(f).trim().replace(',', '.'); return v === '' ? null : parseFloat(v); };
-  const f = { q: norm(g('q')), syn: norm(g('syn')), coll: norm(g('coll')), multi: {}, sel: {}, y1: n('y1'), y2: n('y2'), r1: n('r1'), r2: n('r2'), t1: n('t1'), t2: n('t2'), e1: n('e1'), e2: n('e2') };
+  const f = { kinds: Object.assign({}, KON), q: mkTerm(g('q')), syn: mkTerm(g('syn')), coll: mkTerm(g('coll')), multi: {}, sel: {},
+    y1: n('y1'), y2: n('y2'), r1: n('r1'), r2: n('r2'), t1: n('t1'), t2: n('t2'), e1: n('e1'), e2: n('e2'), rt1: n('rt1'), rt2: n('rt2'), m1: n('m1'), m2: n('m2'), oscar: g('oscar') === 'da' };
   r.querySelectorAll('[data-multi]').forEach(w => {
     const terms = [];
-    w.querySelectorAll('.mrow').forEach(row => { const v = norm(row.querySelector('input').value); if (v) terms.push({ v, op: row.dataset.op }); });
+    w.querySelectorAll('.mrow').forEach(row => { const t = mkTerm(row.querySelector('input').value); if (t) terms.push({ t, op: row.dataset.op }); });
     if (terms.length) f.multi[w.dataset.multi] = terms;
   });
   for (const k of SELF) { const s = r.querySelector('select[data-f="' + k + '"]'); if (s && s.value) f.sel[k] = s.value; }
+  f.onlySeries = !!(f.sel.sstatus || f.sel.mini || f.e1 != null || f.e2 != null);
   return f;
 }
 function match(r, f) {
-  if (f.q && !(r.n.title.includes(f.q) || r.n.original.includes(f.q))) return false;
-  if (f.syn && !r.n.synopsis.includes(f.syn)) return false;
-  if (f.coll && !r.n.collection.includes(f.coll)) return false;
+  if (f.oscar && r.kind !== 'film') return false;
+  if (f.onlySeries && r.kind !== 'series') return false;
+  if (f.q && !(hit(f.q, r, 'title') || hit(f.q, r, 'original'))) return false;
+  if (f.syn && !hit(f.syn, r, 'synopsis')) return false;
+  if (f.coll && !hit(f.coll, r, 'collection')) return false;
+  if (f.oscar && !r.v.oscar) return false;
   for (const k in f.sel) {
     const s = f.sel[k];
     if (s === '__empty') { if (r.v[k]) return false; }
@@ -538,31 +605,62 @@ function match(r, f) {
   if (f.r2 != null && !(r.rating <= f.r2)) return false;
   if (f.t1 != null && !(r.runtime >= f.t1)) return false;
   if (f.t2 != null && !(r.runtime <= f.t2)) return false;
+  if (f.rt1 != null && !(r.rt >= f.rt1)) return false;
+  if (f.rt2 != null && !(r.rt <= f.rt2)) return false;
+  if (f.m1 != null && !(r.meta >= f.m1)) return false;
+  if (f.m2 != null && !(r.meta <= f.m2)) return false;
   if (f.e1 != null || f.e2 != null) { const e = num(r.v.eps); if (f.e1 != null && !(e >= f.e1)) return false; if (f.e2 != null && !(e <= f.e2)) return false; }
   for (const k in f.multi) {
-    const t = f.multi[k], hay = r.n[k];
-    let res = hay.includes(t[0].v);
-    for (let i = 1; i < t.length; i++) { const h = hay.includes(t[i].v); res = t[i].op === 'in' ? (res && h) : (res || h); }
-    if (!res) return false;
+    let res = null;
+    for (const { t, op } of f.multi[k]) {
+      if (op === 'not') continue;
+      const h = hit(t, r, k);
+      res = res === null ? h : (op === 'or' ? (res || h) : (res && h));
+    }
+    if (res === false) return false;
+    for (const { t, op } of f.multi[k]) if (op === 'not' && hit(t, r, k)) return false;
   }
   return true;
 }
-const filtered = kind => { const d = D[kind]; if (!d) return []; const f = readFilters(kind); return d.rows.filter(r => match(r, f)); };
+const filtered = () => { const f = readFilters(); return pool().filter(r => match(r, f)); };
 
-function applyKind() {
-  document.querySelectorAll('#seg button').forEach(b => b.classList.toggle('on', b.dataset.k === KIND));
-  for (const k of KINDS) root(k).classList.toggle('hidden', k !== KIND);
+function applyKinds() {
+  document.querySelectorAll('#seg button').forEach(b => { const k = b.dataset.k; b.classList.toggle('on', !!KON[k]); b.style.display = D[k] ? '' : 'none'; });
+  Object.keys(SUG).forEach(k => delete SUG[k]);
   countNow();
 }
-$('#seg').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; KIND = b.dataset.k; lsSet('filmoteka.kind', KIND); applyKind(); window.scrollTo(0, 0); });
-$('#b-clear').onclick = () => { buildFilters(KIND); countNow(); };
+$('#seg').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const k = b.dataset.k, other = k === 'film' ? 'series' : 'film';
+  if (KON[k] && !KON[other]) { toast('Vsaj ena vrsta mora biti vklopljena'); return; }
+  KON[k] = !KON[k]; lsSet('filmoteka.kon', JSON.stringify(KON)); applyKinds();
+});
+$('#b-clear').onclick = () => { buildForm(true); window.scrollTo(0, 0); };
+
+/* ================= pogledi (filtri / rezultati / podrobnosti) ================= */
+let V = 'f'; const scrollAt = {};
+function setView(v) {
+  if (v === V) return;
+  scrollAt[V] = window.scrollY;
+  V = v; document.body.dataset.v = v;
+  $('#s-filters').classList.toggle('hidden', v !== 'f');
+  $('#s-results').classList.toggle('hidden', v !== 'res');
+  $('#s-det').classList.toggle('hidden', v !== 'det');
+  window.scrollTo(0, v === 'det' ? 0 : (scrollAt[v] || 0));
+}
+window.addEventListener('popstate', () => setView((history.state && history.state.v) || 'f'));
+const push = v => { history.pushState({ v }, '', '#' + v); setView(v); };
+$('#b-back').onclick = () => history.back();
+$('#b-back2').onclick = () => history.back();
 
 /* ================= rezultati ================= */
-const RES = { kind: 'film', f: null, list: [], shown: 0, key: 'title', dir: 1 };
+const RES = { f: null, list: [], shown: 0, key: 'title', dir: 1 };
 const SORTS = {
   title: { label: 'Naslov', get: r => r.title, str: true, dir: 1 },
   year: { label: 'Leto', get: r => r.year, dir: -1, need: 'year' },
   rating: { label: 'IMDB ocena', get: r => r.rating, dir: -1, need: 'rating' },
+  rt: { label: 'Rotten Tomatoes', get: r => r.rt, dir: -1, need: 'rt' },
+  meta: { label: 'Metascore', get: r => r.meta, dir: -1, need: 'meta' },
   runtime: { label: 'Trajanje', get: r => r.runtime, dir: 1, need: 'runtime' },
   last: { label: 'Zadnji ogled', get: r => r.last, dir: -1, need: 'lastwatched' },
   random: { label: 'Naključno', dir: 1 },
@@ -580,7 +678,7 @@ function applySort() {
 }
 function setSortUI() {
   const sel = $('#sortkey'); sel.textContent = '';
-  for (const [k, s] of Object.entries(SORTS)) if (!s.need || (D[RES.kind] && D[RES.kind].has.has(s.need))) sel.append(el('option', { value: k, text: 'Razvrsti: ' + s.label }));
+  for (const [k, s] of Object.entries(SORTS)) if (!s.need || U.has.has(s.need)) sel.append(el('option', { value: k, text: 'Razvrsti: ' + s.label }));
   if (![...sel.options].some(o => o.value === RES.key)) { RES.key = 'title'; RES.dir = 1; }
   sel.value = RES.key; $('#sortdir').textContent = RES.dir === 1 ? '↑' : '↓';
   $('#sortdir').style.visibility = RES.key === 'random' ? 'hidden' : 'visible';
@@ -592,14 +690,16 @@ function setBadge(o) {
 }
 function card(o, i) {
   const t = o.title + (o.yearText ? ' (' + o.yearText + ')' : '');
-  const a = el(o.imdb ? 'a' : 'div', { class: 'card', title: t, 'data-i': i });
-  if (o.imdb) { a.href = o.imdb; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.draggable = false; }
+  const a = el('div', { class: 'card', title: t, 'data-i': i, role: 'button', tabindex: '0' });
   const pw = el('div', { class: 'pw' });
   if (o.poster) {
     const img = el('img', { loading: 'lazy', decoding: 'async', alt: '', draggable: 'false' });
     img.onerror = () => { img.remove(); pw.classList.add('noimg'); pw.prepend(document.createTextNode(o.title)); };
-    img.src = thumb(o.poster, 320); pw.append(img);
+    img.src = thumb(o.poster, 342); pw.append(img);
   } else { pw.classList.add('noimg'); pw.append(o.title); }
+  const mixed = RES.f && RES.f.kinds.film && RES.f.kinds.series;
+  if (isMini(o)) pw.append(el('div', { class: 'kb mini', text: 'MINI' }));
+  else if (mixed && o.kind === 'series') pw.append(el('div', { class: 'kb', text: 'SERIJA' }));
   pw.append(el('div', { class: 'bdg' + (o.status ? ' ' + o.status : ''), text: '✓' }));
   a.append(pw, el('div', { class: 't', text: t }));
   o.el = a;
@@ -612,32 +712,33 @@ function more() {
   for (let i = RES.shown; i < end; i++) frag.append(card(RES.list[i], i));
   grid.append(frag); RES.shown = end;
 }
+function resLabel() {
+  const f = RES.f, n = RES.list.length;
+  if (f.kinds.film && f.kinds.series) return n.toLocaleString('sl') + ' zadetkov';
+  return n.toLocaleString('sl') + ' ' + (f.kinds.film ? 'filmov' : 'serij');
+}
 function renderResults(keep) {
   const grid = $('#grid'); grid.textContent = ''; RES.shown = 0;
-  $('#rescount').textContent = RES.list.length.toLocaleString('sl') + ' ' + (RES.kind === 'film' ? 'filmov' : 'serij');
+  $('#rescount').textContent = resLabel();
   if (!RES.list.length) { grid.append(el('div', { class: 'empty', style: 'grid-column:1/-1', text: 'Ni zadetkov. Poskusi s širšimi filtri.' })); return; }
   more();
   while (keep && RES.shown < Math.min(keep, RES.list.length)) more();
 }
 function showResults() {
-  if (!D[KIND]) return;
-  RES.kind = KIND; RES.f = readFilters(KIND);
-  RES.list = D[KIND].rows.filter(r => match(r, RES.f));
+  if (!pool().length) return;
+  RES.f = readFilters();
+  RES.list = pool().filter(r => match(r, RES.f));
   applySort(); setSortUI(); renderResults();
-  $('#s-filters').classList.add('hidden'); $('#s-results').classList.remove('hidden');
-  window.scrollTo(0, 0);
-  if (!history.state || !history.state.res) history.pushState({ res: 1 }, '', '#rezultati');
+  scrollAt.res = 0;
+  if (V === 'res') window.scrollTo(0, 0); else push('res');
 }
-function showFilters() { $('#s-results').classList.add('hidden'); $('#s-filters').classList.remove('hidden'); }
-window.addEventListener('popstate', showFilters);
 new IntersectionObserver(es => { if (es[0].isIntersecting && RES.shown < RES.list.length) more(); }, { rootMargin: '900px' }).observe($('#sentinel'));
 $('#b-show').onclick = showResults;
-$('#b-back').onclick = () => history.back();
 $('#sortkey').onchange = e => { RES.key = e.target.value; RES.dir = SORTS[RES.key].dir; applySort(); setSortUI(); renderResults(); window.scrollTo(0, 0); };
 $('#sortdir').onclick = () => { RES.dir *= -1; applySort(); setSortUI(); renderResults(); window.scrollTo(0, 0); };
 
-/* ================= dolg pritisk ================= */
-(function longPress() {
+/* ================= dotik: kratek = podrobnosti, dolg = meni ================= */
+(function touch() {
   const grid = $('#grid'); let lp = null;
   const cancel = () => { if (lp) clearTimeout(lp.t); };
   grid.addEventListener('pointerdown', e => {
@@ -647,7 +748,11 @@ $('#sortdir').onclick = () => { RES.dir *= -1; applySort(); setSortUI(); renderR
   });
   grid.addEventListener('pointermove', e => { if (lp && Math.hypot(e.clientX - lp.x, e.clientY - lp.y) > 10) cancel(); });
   ['pointerup', 'pointercancel', 'pointerleave'].forEach(t => grid.addEventListener(t, cancel));
-  grid.addEventListener('click', e => { if (lp && lp.fired) { e.preventDefault(); e.stopPropagation(); lp.fired = false; } }, true);
+  grid.addEventListener('click', e => {
+    if (lp && lp.fired) { e.preventDefault(); e.stopPropagation(); lp.fired = false; return; }
+    const c = e.target.closest('.card'); if (!c) return;
+    const o = RES.list[+c.dataset.i]; if (o) openDetails(o);
+  }, true);
   grid.addEventListener('contextmenu', e => e.preventDefault());
 })();
 
@@ -656,7 +761,7 @@ let saveT;
 const saveSoon = () => { clearTimeout(saveT); saveT = setTimeout(() => { if (RAW) idbSet('data', { version: RAW.version, payload: RAW }); }, 2500); };
 const ident = o => ({ kind: o.kind, row: o.r, id: o.id, name: o.ix.title != null ? String(o.raw[o.ix.title] == null ? '' : o.raw[o.ix.title]) : '' });
 const hdrToField = h => COL[norm(h)];
-function setLocal(o, fields) {      // fields: { polje: vrednost }
+function setLocal(o, fields) {
   for (const [f, x] of Object.entries(fields)) {
     if (o.ix[f] == null) continue;
     const s = x == null ? '' : String(x);
@@ -665,16 +770,16 @@ function setLocal(o, fields) {      // fields: { polje: vrednost }
   }
   derive(o); setBadge(o); saveSoon();
 }
-function snapshot(o, fs) { const s = {}; for (const f of fs) s[f] = o.v[f] || ''; return s; }
+const snapshot = (o, fs) => { const s = {}; for (const f of fs) s[f] = o.v[f] || ''; return s; };
 function fromServer(map) { const out = {}; for (const h in map) { const f = hdrToField(h); if (f) out[f] = map[h] == null ? '' : map[h]; } return out; }
 function toServer(o, fields) { const out = {}, hn = D[o.kind].hn; for (const [f, x] of Object.entries(fields)) if (hn[f]) out[hn[f]] = x == null ? '' : x; return out; }
 
 function watchPlan(o) {
   const today = isoToday();
   if (o.kind === 'series') {
-    const tot = num(o.v.eps), cur = num(o.v.seen) || 0; let ns, st;
+    const tot = num(o.v.eps), cur = num(o.v.seen) || 0;
     if (norm(o.v.watched) === 'da' || (tot > 0 && cur >= tot)) return { watched: 'da', lastwatched: today };   // že ogledano: samo nov datum
-    ns = cur + 1; st = (tot > 0 && ns >= tot) ? 'da' : 'v teku';
+    const ns = cur + 1, st = (tot > 0 && ns >= tot) ? 'da' : 'v teku';
     const now = { watched: st, lastwatched: today }; if (o.ix.seen != null) now.seen = ns;
     return now;
   }
@@ -683,22 +788,18 @@ function watchPlan(o) {
 async function doWatch(o) {
   const now = watchPlan(o), prev = snapshot(o, Object.keys(now));
   setLocal(o, now);
-  const msg = o.kind === 'series' ? (now.seen != null ? 'Epizoda ' + now.seen + (num(o.v.eps) > 0 ? ' / ' + num(o.v.eps) : '') + ' – ' : '') + o.title : 'Ogledano – ' + o.title;
-  const undo = async () => { setLocal(o, prev); try { await api('update', Object.assign(ident(o), { values: toServer(o, prev) })); toast('Razveljavljeno'); } catch (e) { toast('Razveljavitev ni uspela: ' + e.message); } };
-  snack(msg, undo);
+  toast(o.kind === 'series' ? (now.seen != null ? 'Epizoda ' + now.seen + (num(o.v.eps) > 0 ? ' / ' + num(o.v.eps) : '') + ' – ' : '') + o.title : 'Ogledano – ' + o.title);
   try {
     const r = await api('watch', ident(o));
     if (r.now) setLocal(o, fromServer(r.now));
     if (r.version) { RAW.version = r.version; saveSoon(); }
-  } catch (e) { setLocal(o, prev); $('#snack').classList.remove('on'); toast('Zapis ni uspel: ' + e.message); }
+  } catch (e) { setLocal(o, prev); toast('Zapis ni uspel: ' + e.message); }
 }
 async function doUpdate(o, fields, label) {
   const prev = snapshot(o, Object.keys(fields));
-  setLocal(o, fields);
-  const undo = async () => { setLocal(o, prev); try { await api('update', Object.assign(ident(o), { values: toServer(o, prev) })); toast('Razveljavljeno'); } catch (e) { toast('Razveljavitev ni uspela: ' + e.message); } };
-  snack(label || 'Shranjeno', undo);
+  setLocal(o, fields); toast(label || 'Shranjeno');
   try { const r = await api('update', Object.assign(ident(o), { values: toServer(o, fields) })); if (r.version) { RAW.version = r.version; saveSoon(); } }
-  catch (e) { setLocal(o, prev); $('#snack').classList.remove('on'); toast('Zapis ni uspel: ' + e.message); }
+  catch (e) { setLocal(o, prev); toast('Zapis ni uspel: ' + e.message); }
 }
 
 /* ================= meni ob dolgem pritisku ================= */
@@ -715,15 +816,12 @@ function openMenu(o) {
 }
 $('#m-close').onclick = () => $('#dlg-menu').close();
 $('#m-watch').onclick = () => { $('#dlg-menu').close(); doWatch(CUR); };
-$('#m-det').onclick = () => { $('#dlg-menu').close(); openDetails(CUR); };
 $('#m-list').onclick = () => {
   const o = CUR; $('#dlg-menu').close();
   const box = $('#l-opts'); box.textContent = '';
   $('#l-sub').textContent = o.title + (o.v.towatch ? ' · zdaj: ' + o.v.towatch : ' · zdaj: ni na seznamu');
-  const opts = D[o.kind].opts.towatch || [];
-  for (const [k, t] of opts) {
-    const b = el('button', { class: 'mbtn', type: 'button', onclick: () => { $('#dlg-list').close(); doUpdate(o, { towatch: t }, 'Za ogled: ' + t); } }, el('i', { text: norm(o.v.towatch) === k ? '●' : '○' }), el('span', { text: t }));
-    box.append(b);
+  for (const [k, t] of (D[o.kind].opts.towatch || [])) {
+    box.append(el('button', { class: 'mbtn', type: 'button', onclick: () => { $('#dlg-list').close(); doUpdate(o, { towatch: t }, 'Za ogled: ' + t); } }, el('i', { text: norm(o.v.towatch) === k ? '●' : '○' }), el('span', { text: t })));
   }
   if (o.v.towatch) box.append(el('button', { class: 'mbtn', type: 'button', onclick: () => { $('#dlg-list').close(); doUpdate(o, { towatch: '' }, 'Odstranjeno s seznama za ogled'); } }, el('i', { text: '✕' }), el('span', { text: 'Odstrani s seznama' })));
   $('#dlg-list').showModal();
@@ -731,135 +829,137 @@ $('#m-list').onclick = () => {
 $('#l-close').onclick = () => $('#dlg-list').close();
 
 /* ================= podrobnosti ================= */
+const splitList = s => String(s || '').split(',').map(x => x.trim()).filter(Boolean);
 function kv(rows) {
   const dl = el('dl', { class: 'kv' }); let n = 0;
-  for (const [k, v] of rows) { if (!v) continue; dl.append(el('dt', { text: k }), el('dd', { text: v })); n++; }
+  for (const [k, v] of rows) { if (v === '' || v == null || v === false) continue; dl.append(el('dt', { text: k }), el('dd', { text: String(v) })); n++; }
   return n ? dl : null;
 }
-function section(title, ...kids) { const k = kids.flat().filter(Boolean); return k.length ? el('div', { class: 'dsec' }, el('h3', { text: title }), k) : null; }
+function section(title, ...kids) { const k = kids.flat().filter(Boolean); return k.length ? el('div', { class: 'dsec' }, title ? el('h3', { text: title }) : null, k) : null; }
+function expander(label, build) {
+  const wrap = el('div', {}), body = el('div', { class: 'xbody hidden' }); let built = false;
+  const b = el('button', { type: 'button', class: 'xbtn' }, el('b', { text: label, style: 'font-weight:600' }), el('span', { text: '▾' }));
+  b.onclick = () => { const open = body.classList.toggle('hidden') === false; b.classList.toggle('open', open); if (open && !built) { built = true; body.append(build() || ''); } };
+  wrap.append(b, body); return wrap;
+}
+function searchBy(field, name) {            // tapnjeno ime igralca / režiserja zažene iskanje
+  KON.film = true; KON.series = true; lsSet('filmoteka.kon', JSON.stringify(KON));
+  buildForm(true); applyKinds();
+  const w = root().querySelector('[data-multi="' + field + '"]');
+  if (w) { const inp = w.querySelector('input'); inp.value = name; }
+  countNow(); updMore();
+  showResults();
+}
+const nameChip = (field, name) => el('button', { type: 'button', class: 'chip lnk', text: name, onclick: () => searchBy(field, name) });
+
+/* slike obrazov igralcev (TMDB) */
+let FACES = (() => { try { return JSON.parse(lsGet('filmoteka.faces')) || {}; } catch { return {}; } })();
+async function faceOf(name) {
+  if (name in FACES) return FACES[name];
+  const key = lsGet('filmoteka.tmdb'); if (!key) return '';
+  try {
+    const r = await fetch('https://api.themoviedb.org/3/search/person?api_key=' + encodeURIComponent(key) + '&query=' + encodeURIComponent(name));
+    if (!r.ok) return '';
+    const j = await r.json(); const p = (j.results || []).find(x => x.profile_path);
+    FACES[name] = p ? p.profile_path : '';
+    const ks = Object.keys(FACES); if (ks.length > 1500) for (const k of ks.slice(0, 300)) delete FACES[k];
+    lsSet('filmoteka.faces', JSON.stringify(FACES));
+    return FACES[name];
+  } catch { return ''; }
+}
+function facesBox(list) {
+  const box = el('div', { class: 'faces' });
+  for (const p of list) {
+    const im = el('div', { class: 'im', text: p.name.charAt(0) });
+    box.append(el('button', { type: 'button', class: 'face', onclick: () => searchBy(p.field, p.name) }, im, p.name));
+    faceOf(p.name).then(path => { if (path) { const img = el('img', { src: 'https://image.tmdb.org/t/p/w185' + path, alt: '', loading: 'lazy' }); img.onload = () => { im.textContent = ''; im.append(img); }; } });
+  }
+  return box;
+}
+
+function scoreBadges(o) {
+  const out = [];
+  if (!isNaN(o.rating) || o.imdb) {
+    const t = el(o.imdb ? 'a' : 'span', { class: 'sc imdb' }, el('small', { text: 'IMDb' }), isNaN(o.rating) ? '–' : o.rating.toFixed(1));
+    if (o.imdb) { t.href = o.imdb; t.target = '_blank'; t.rel = 'noopener noreferrer'; }
+    out.push(t);
+  }
+  if (!isNaN(o.rt)) out.push(el('span', { class: 'sc rt' + (o.rt < 60 ? ' rot' : '') }, el('small', { text: 'RT' }), Math.round(o.rt) + '%'));
+  if (!isNaN(o.meta)) out.push(el('span', { class: 'sc meta ' + (o.meta >= 61 ? 'g' : o.meta >= 40 ? 'y' : 'r') }, el('small', { text: 'META' }), String(Math.round(o.meta))));
+  return out;
+}
 function openDetails(o) {
   CUR = o;
   const d = D[o.kind], v = o.v, box = $('#det'); box.textContent = '';
+  $('#det-h').textContent = o.title;
   const post = el('div', { class: 'dpost' });
-  if (o.poster) { const im = el('img', { src: thumb(o.poster, 480), alt: '', draggable: 'false' }); im.onerror = () => im.remove(); post.append(im); }
-  const meta = [o.yearText, v.runtime ? v.runtime + (o.kind === 'series' ? ' / epizoda' : '') : '', v.language].filter(Boolean).join(' · ');
+  if (o.poster) { const im = el('img', { src: thumb(o.poster, 500), alt: '', draggable: 'false' }); im.onerror = () => im.remove(); post.append(im); }
   const info = el('div', { class: 'dinfo' }, el('h2', { text: o.title }));
-  if (v.original && norm(v.original) !== norm(o.title)) info.append(el('div', { class: 'orig', text: v.original }));
-  info.append(el('div', { class: 'meta', text: meta }));
-  if (o.kind === 'series' && (v.seasons || v.eps)) info.append(el('div', { class: 'meta', text: [v.seasons ? num(v.seasons) + ' sez.' : '', v.eps ? num(v.eps) + ' epizod' : ''].filter(Boolean).join(' · ') }));
-  if (!isNaN(o.rating) || o.imdb) {
-    const r = el(o.imdb ? 'a' : 'span', { class: 'rate' }, '★ ' + (isNaN(o.rating) ? 'IMDb' : o.rating.toFixed(1)) + (o.imdb ? '  ↗' : ''));
-    if (o.imdb) { r.href = o.imdb; r.target = '_blank'; r.rel = 'noopener noreferrer'; }
-    info.append(r);
+  const others = splitList((v.original || '').replace(/ \+ /g, ',')).filter(x => norm(x) !== norm(o.title));
+  if (others.length) info.append(el('div', { class: 'orig', text: others.join(' · ') }));
+  info.append(el('div', { class: 'meta', text: [o.yearText, v.runtime ? v.runtime + (o.kind === 'series' ? ' / epizoda' : '') : '', v.age, v.language].filter(Boolean).join(' · ') }));
+  if (o.kind === 'series') {
+    const bits = [isMini(o) ? 'miniserija' : '', v.seasons ? num(v.seasons) + ' sez.' : '', v.eps ? num(v.eps) + ' epizod' : '', v.sstatus].filter(Boolean);
+    if (bits.length) info.append(el('div', { class: 'meta', text: bits.join(' · ') }));
   }
+  const bd = scoreBadges(o); if (bd.length) info.append(el('div', { class: 'badges' }, bd));
   const body = el('div', { class: 'dbody' });
+  const chips = splitList(v.genre).map(g => el('span', { class: 'chip g', text: g }));
+  if (chips.length) body.append(el('div', { class: 'chips', style: 'margin-top:6px' }, chips));
   body.append(section('Vsebina', v.synopsis ? el('p', { text: v.synopsis }) : null));
-  body.append(section('Ekipa in zasedba', kv([['Režija', v.director], ['Scenarij', v.writer], ['Igralci', v.actors]])));
-  const chips = [];
-  for (const g of (v.genre || '').split(',').map(x => x.trim()).filter(Boolean)) chips.push(el('span', { class: 'chip g', text: g }));
-  for (const k of (v.keywords || '').split(',').map(x => x.trim()).filter(Boolean)) chips.push(el('span', { class: 'chip', text: k }));
-  body.append(section('Žanri in ključne besede', chips.length ? el('div', { class: 'chips' }, chips) : null));
-  body.append(section('Podatki', kv([['Podnapisi', v.subtitles], ['V knjižnici', v.library], ['Vir', v.source], ['V zbirki', v.collection], ['Nadaljevanje', v.sequel], ['Posebne epizode', v.specials]])));
-  // moj ogled
-  const mine = el('div', { class: 'mine' });
-  const stTxt = o.status === 'yes' ? 'Ogledano' : o.status === 'prog' ? 'V teku' : 'Neogledano';
-  mine.append(el('div', { class: 'st ' + o.status }, el('i'), stTxt + (v.lastwatched ? ' · ' + fmtDate(v.lastwatched) : '')));
-  const ctrl = {};
-  if (d.ix.watched) {
-    const s = el('select'); s.append(el('option', { value: '', text: '(prazno)' }));
-    const wl = o.kind === 'series' ? [['da', 'da'], ['ne', 'ne'], ['v teku', 'v teku']] : [['da', 'da'], ['ne', 'ne']];
-    for (const [k, t] of (d.opts.watched || wl)) s.append(el('option', { value: t, text: t }));
-    s.value = v.watched; if (s.value !== v.watched) s.value = '';
-    ctrl.watched = s; mine.append(el('div', { class: 'group' }, el('label', { text: 'Ogledano' }), s));
-  }
-  if (o.kind === 'series' && d.ix.seen != null) {
-    const inp = el('input', { type: 'number', inputmode: 'numeric', min: '0', value: v.seen ? String(num(v.seen)) : '' });
-    const tot = num(v.eps);
-    const mk = (t, dlt) => el('button', { type: 'button', text: t, onclick: () => { inp.value = Math.max(0, (num(inp.value) || 0) + dlt); } });
-    ctrl.seen = inp;
-    mine.append(el('div', { class: 'group' }, el('label', { text: 'Ogledanih epizod' }), el('div', { class: 'stepper' }, mk('−', -1), inp, mk('+', 1), el('span', { text: tot > 0 ? '/ ' + tot : '' }))));
-  }
-  if (d.ix.lastwatched != null) {
-    const inp = el('input', { type: 'date', value: /^\d{4}-\d{2}-\d{2}/.test(v.lastwatched) ? v.lastwatched.slice(0, 10) : '' });
-    ctrl.lastwatched = inp; mine.append(el('div', { class: 'group' }, el('label', { text: 'Datum zadnjega ogleda' }), inp));
-  }
-  if (d.ix.towatch != null) {
-    const s = el('select'); s.append(el('option', { value: '', text: '(ni na seznamu)' }));
-    for (const [k, t] of (d.opts.towatch || [])) s.append(el('option', { value: t, text: t }));
-    s.value = v.towatch; if (s.value !== v.towatch) s.value = '';
-    ctrl.towatch = s; mine.append(el('div', { class: 'group' }, el('label', { text: 'Za ogled' }), s));
-  }
-  const row = el('div', { class: 'row' });
-  if (o.kind === 'series' && d.ix.seen != null && num(v.eps) > 0)
-    row.append(el('button', { type: 'button', text: 'Vse epizode ogledane', onclick: () => { ctrl.seen.value = num(v.eps); if (ctrl.watched) ctrl.watched.value = 'da'; if (ctrl.lastwatched && !ctrl.lastwatched.value) ctrl.lastwatched.value = isoToday(); } }));
-  row.append(el('button', { type: 'button', text: 'Odznači', onclick: () => { if (ctrl.watched) ctrl.watched.value = o.kind === 'series' ? '' : 'ne'; if (ctrl.seen) ctrl.seen.value = ''; if (ctrl.lastwatched) ctrl.lastwatched.value = ''; } }));
-  row.append(el('button', { type: 'button', class: 'primary', text: 'Shrani', onclick: () => {
-    const fields = {};
-    for (const f in ctrl) { const nv = String(ctrl[f].value || '').trim(); if (nv !== String(v[f] == null ? '' : (f === 'seen' && v.seen ? num(v.seen) : v[f])).slice(0, f === 'lastwatched' ? 10 : 999)) fields[f] = nv; }
-    if (!Object.keys(fields).length) { $('#dlg-det').close(); return; }
-    $('#dlg-det').close(); doUpdate(o, fields, 'Shranjeno – ' + o.title);
-  } }));
-  mine.append(row);
-  body.append(section('Moj ogled', mine));
+  const dirs = splitList(v.director), cast = splitList(v.actors).slice(0, 10);
+  body.append(section(dirs.length ? (dirs.length > 1 ? 'Režija' : 'Režija') : '', dirs.length ? el('div', { class: 'chips' }, dirs.map(n => nameChip('director', n))) : null));
+  body.append(section('Igralci', cast.length ? el('div', { class: 'chips' }, cast.map(n => nameChip('actors', n))) : null));
+  if ((cast.length || dirs.length) && lsGet('filmoteka.tmdb'))
+    body.append(expander('Slike igralcev in režije', () => facesBox([...dirs.map(n => ({ name: n, field: 'director' })), ...cast.map(n => ({ name: n, field: 'actors' }))])));
+  // več podatkov
+  const mine = [
+    ['Ogledano', o.status === 'yes' ? 'da' : o.status === 'prog' ? 'v teku' : 'ne'],
+    ['Zadnji ogled', v.lastwatched ? fmtDate(v.lastwatched) : ''],
+    o.kind === 'series' ? ['Ogledanih epizod', v.seen ? num(v.seen) + (num(v.eps) > 0 ? ' / ' + num(v.eps) : '') : ''] : null,
+    ['Za ogled', v.towatch], ['V knjižnici', v.library], ['Vir', v.source], ['Podnapisi', v.subtitles],
+  ].filter(Boolean);
+  const extra = [
+    ['Scenarij', v.writer], ['Število nagrad', v.awards ? num(v.awards) : ''],
+    ['Oskar', o.kind === 'film' && v.oscar ? 'najboljši film (podelitev ' + v.oscar + ')' : ''],
+    ['V zbirki', v.collection], ['Nadaljevanje', v.sequel], ['Posebne epizode', v.specials],
+    ['Ključne besede', v.keywords],
+  ];
+  body.append(expander('Več podatkov', () => el('div', {}, kv(mine), el('div', { style: 'height:12px' }), kv(extra))));
+  const links = [];
+  if (o.imdb) links.push(el('a', { href: o.imdb, target: '_blank', rel: 'noopener noreferrer', text: 'Odpri na IMDB ↗' }));
+  if (o.tmdb) links.push(el('a', { href: o.tmdb, target: '_blank', rel: 'noopener noreferrer', text: 'Odpri na TMDB ↗' }));
+  else if (!o.imdb) links.push(el('a', { href: 'https://www.google.com/search?q=' + encodeURIComponent(o.title + ' ' + (o.year || '')), target: '_blank', rel: 'noopener noreferrer', text: 'Poišči na spletu ↗' }));
+  body.append(section('Povezave', el('div', { class: 'links' }, links)));
   box.append(el('div', { class: 'dtop' }, post, info), body);
-  $('#dlg-det').showModal(); $('#dlg-det').scrollTop = 0;
+  if (V === 'det') window.scrollTo(0, 0); else push('det');
 }
-$('#det-x').onclick = () => $('#dlg-det').close();
 
-/* ================= naključni predlog ================= */
+/* ================= naključni predlog (po trenutnih filtrih, samo neogledano) ================= */
 const rndSeen = new Set();
 function pickRandom() {
-  const all = filtered(KIND).filter(o => o.status === '');
+  const all = filtered().filter(o => o.status === '');
   $('#r-det').classList.add('hidden'); $('#r-next').classList.add('hidden');
   const box = $('#rnd'); box.textContent = '';
   if (!all.length) { box.append(el('div', { class: 'empty', style: 'padding:30px 0', text: 'Z izbranimi filtri ni neogledanih naslovov.' })); return; }
-  let pool = all.filter(o => !rndSeen.has(o.kind + o.r));
-  if (!pool.length) { rndSeen.clear(); pool = all; }
-  const o = pool[Math.floor(Math.random() * pool.length)];
+  let p = all.filter(o => !rndSeen.has(o.kind + o.r));
+  if (!p.length) { rndSeen.clear(); p = all; }
+  const o = p[Math.floor(Math.random() * p.length)];
   rndSeen.add(o.kind + o.r); CUR = o;
   const post = el('div', { class: 'dpost' });
-  if (o.poster) { const im = el('img', { src: thumb(o.poster, 400), alt: '', draggable: 'false' }); im.onerror = () => im.remove(); post.append(im); }
+  if (o.poster) { const im = el('img', { src: thumb(o.poster, 342), alt: '', draggable: 'false' }); im.onerror = () => im.remove(); post.append(im); }
   const txt = el('div', { class: 'txt' }, el('h2', { text: o.title + (o.yearText ? ' (' + o.yearText + ')' : '') }),
-    el('div', { class: 'meta', style: 'color:var(--mu);font-size:14px', text: [isNaN(o.rating) ? '' : '★ ' + o.rating.toFixed(1), o.v.runtime, o.v.genre].filter(Boolean).join(' · ') }));
+    el('div', { style: 'color:var(--mu);font-size:14px', text: [o.kind === 'series' ? (isMini(o) ? 'Miniserija' : 'Serija') : '', isNaN(o.rating) ? '' : '★ ' + o.rating.toFixed(1), o.v.runtime, o.v.genre].filter(Boolean).join(' · ') }));
   if (o.v.synopsis) txt.append(el('div', { class: 'syn', text: o.v.synopsis }));
-  if (o.imdb) { const a = el('a', { class: 'rate', href: o.imdb, target: '_blank', rel: 'noopener noreferrer', text: 'Odpri na IMDB ↗' }); a.style.fontSize = '14px'; txt.append(a); }
   box.append(el('div', { class: 'rnd' }, post, txt), el('div', { class: 'hint', text: 'Med ' + all.length.toLocaleString('sl') + ' neogledanimi (po izbranih filtrih).' }));
   $('#r-det').classList.remove('hidden'); $('#r-next').classList.remove('hidden');
 }
-$('#b-rand').onclick = () => { if (!D[KIND]) return; pickRandom(); $('#dlg-rnd').showModal(); };
+$('#b-rand').onclick = () => { if (!pool().length) return; pickRandom(); $('#dlg-rnd').showModal(); };
 $('#r-next').onclick = pickRandom;
 $('#r-close').onclick = () => $('#dlg-rnd').close();
 $('#r-det').onclick = () => { $('#dlg-rnd').close(); openDetails(CUR); };
 
-/* ================= pomagaj mi izbrati ================= */
-function helpText() {
-  const all = filtered(KIND).filter(o => o.status === '');
-  const n = +$('#h-n').value, mode = $('#h-m').value;
-  let list = all.slice();
-  if (list.length > n) {
-    if (mode === 'top') list.sort((a, b) => (isNaN(b.rating) ? -1 : b.rating) - (isNaN(a.rating) ? -1 : a.rating));
-    else for (let i = list.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [list[i], list[j]] = [list[j], list[i]]; }
-    list = list.slice(0, n);
-  }
-  list.sort((a, b) => coll.compare(a.title, b.title));
-  const isF = KIND === 'film';
-  const lines = list.map(o => [o.title + (o.yearText ? ' (' + o.yearText + ')' : ''), o.v.genre, isNaN(o.rating) ? '' : '★' + o.rating.toFixed(1), o.v.runtime, !isF && o.v.eps ? num(o.v.eps) + ' ep.' : '', o.v.towatch ? 'za ogled: ' + o.v.towatch : ''].filter(Boolean).join(' | '));
-  const head = 'Pomagaj mi izbrati ' + (isF ? 'film' : 'serijo') + ' za ogled. Spodaj je seznam ' + list.length + ' neogledanih ' + KIND_LABEL[KIND] + ' z mojega seznama' +
-    (all.length > list.length ? ' (izbor iz ' + all.length + ', ' + (mode === 'top' ? 'najbolje ocenjeni' : 'naključni') + ')' : '') +
-    '. Najprej mi zastavi največ tri kratka vprašanja (razpoloženje, čas, družba), nato mi predlagaj 3 naslove SAMO s tega seznama in vsakega utemelji z eno povedjo.\n\nSeznam (naslov | žanr | ocena | trajanje):\n';
-  return { text: head + lines.join('\n'), shown: list.length, total: all.length };
-}
-function helpInfo() { const h = helpText(); $('#h-info').textContent = 'Neogledanih ' + KIND_LABEL[KIND] + ' po izbranih filtrih: ' + h.total.toLocaleString('sl') + '. V pogovor jih gre ' + h.shown.toLocaleString('sl') + '.'; return h; }
-$('#b-help').onclick = () => { if (!D[KIND]) return; $('#h-ta').classList.add('hidden'); helpInfo(); $('#dlg-help').showModal(); };
-$('#h-n').onchange = $('#h-m').onchange = helpInfo;
-$('#h-close').onclick = () => $('#dlg-help').close();
-$('#h-go').onclick = async () => {
-  const h = helpText();
-  try { await navigator.clipboard.writeText(h.text); toast('Kopirano – v pogovoru prilepi'); $('#dlg-help').close(); window.open('https://claude.ai/new', '_blank'); }
-  catch { const ta = $('#h-ta'); ta.value = h.text; ta.classList.remove('hidden'); ta.focus(); ta.select(); toast('Kopiraj besedilo ročno in odpri claude.ai'); }
-};
-
-/* ================= nalaganje ================= */
+/* ================= nalaganje (samo če se je preglednica spremenila) ================= */
 let lastLoad = 0, busy = false;
 async function load(force) {
   if (busy) return; busy = true;
@@ -876,7 +976,7 @@ async function load(force) {
     lastLoad = Date.now();
   } catch (e) {
     if (haveCache) toast('Ni povezave – prikazan je shranjeni seznam');
-    else { for (const k of KINDS) { root(k).textContent = ''; root(k).append(el('div', { class: 'empty', text: 'Seznama ni bilo mogoče naložiti (' + e.message + '). Preveri nastavitve (⚙).' })); } }
+    else root().append(el('div', { class: 'empty', text: 'Seznama ni bilo mogoče naložiti (' + e.message + '). Preveri nastavitve (⚙).' }));
   }
   loading(false); busy = false;
 }
@@ -899,6 +999,7 @@ $('#d-share').onclick = async () => {
 $('#d-cache').onclick = async () => { await idbClear(); toast('Shranjeni seznam izbrisan'); };
 $('#b-refresh').onclick = () => load(true);
 
+if (history.state && history.state.v) history.replaceState(null, '', location.pathname);
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 load(false);
 </script>
