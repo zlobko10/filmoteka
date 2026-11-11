@@ -242,7 +242,7 @@ const num = v => { const m = String(v == null ? '' : v).replace(',', '.').match(
 const isoToday = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
 const fmtDate = s => { const m = String(s || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? (+m[3]) + '. ' + (+m[2]) + '. ' + m[1] : (s || ''); };
 let toastT;
-function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2800); }
+function toast(msg) { const t = $('#toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 6000); }
 document.querySelectorAll('dialog').forEach(d => d.addEventListener('click', e => { if (e.target === d) d.close(); }));
 const loading = on => $('#loading').classList.toggle('hidden', !on);
 const lsGet = k => { try { return localStorage.getItem(k); } catch { return null; } };
@@ -960,7 +960,7 @@ $('#r-close').onclick = () => $('#dlg-rnd').close();
 $('#r-det').onclick = () => { $('#dlg-rnd').close(); openDetails(CUR); };
 
 /* ================= nalaganje (samo če se je preglednica spremenila) ================= */
-let lastLoad = 0, busy = false;
+let lastLoad = 0, busy = false, lastErr = '';
 async function load(force) {
   if (busy) return; busy = true;
   const cfg = getCfg();
@@ -975,7 +975,7 @@ async function load(force) {
     else { ingest(r); await idbSet('data', { version: r.version, payload: r }); if (haveCache) toast('Seznam posodobljen'); }
     lastLoad = Date.now();
   } catch (e) {
-    if (haveCache) toast('Ni povezave – prikazan je shranjeni seznam');
+    if (haveCache) { toast('Napaka: ' + e.message + ' (prikazan je shranjeni seznam)'); lastErr = e.message; }
     else root().append(el('div', { class: 'empty', text: 'Seznama ni bilo mogoče naložiti (' + e.message + '). Preveri nastavitve (⚙).' }));
   }
   loading(false); busy = false;

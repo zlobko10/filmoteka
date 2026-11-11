@@ -1,6 +1,6 @@
 // Preprosti service worker: lupina aplikacije se odpre tudi brez povezave.
 // Podatki (seznam filmov) se shranjujejo ločeno v aplikaciji (IndexedDB).
-const CACHE = 'filmoteka-v2';
+const CACHE = 'filmoteka-v3';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
